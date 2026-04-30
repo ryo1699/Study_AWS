@@ -1,0 +1,10 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# secrets
+terraform.tfvars
+
+# SSH key
+*.pem
