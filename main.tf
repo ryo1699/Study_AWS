@@ -3,6 +3,15 @@ provider "aws" {
 }
 
 terraform {
+  backend "s3" {
+    bucket       = "ryo-terraform-state-20260430"
+    key          = "study-aws/terraform.tfstate"
+    region       = "ap-northeast-1"
+    profile      = "AdministratorAccess-058898200941"
+    encrypt      = true
+    use_lockfile = true
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -107,7 +116,6 @@ resource "aws_security_group" "web_sg" {
   name   = "ryo-web-sg"
   vpc_id = aws_vpc.main.id
 
-  # HTTP
   ingress {
     from_port   = 80
     to_port     = 80
@@ -115,7 +123,6 @@ resource "aws_security_group" "web_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # SSH（自分のIPのみ）
   ingress {
     from_port   = 22
     to_port     = 22
@@ -123,7 +130,6 @@ resource "aws_security_group" "web_sg" {
     cidr_blocks = [var.my_ip]
   }
 
-  # outbound 全許可
   egress {
     from_port   = 0
     to_port     = 0
