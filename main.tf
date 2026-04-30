@@ -28,7 +28,7 @@ resource "tls_private_key" "ryo_key" {
 }
 
 resource "local_sensitive_file" "ryo_private_key" {
-  filename        = "/Users/ryo/Documents/研究室/勉強会_AWS/ryo-key.pem"
+  filename        = "${path.module}/ryo-key.pem"
   content         = tls_private_key.ryo_key.private_key_pem
   file_permission = "0400"
 }
