@@ -8,3 +8,6 @@ terraform.tfvars
 
 # SSH key
 *.pem
+
+# Local environment
+.env
